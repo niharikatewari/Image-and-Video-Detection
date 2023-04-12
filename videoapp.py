@@ -99,7 +99,7 @@ def infer_image(img, size=None):
     return image
 
 
-@st.experimental_singleton
+@st.cache_resource
 def load_model(path, device):
     model_ = torch.hub.load('ultralytics/yolov5', 'custom', path=path, force_reload=True)
     model_.to(device)
@@ -107,7 +107,7 @@ def load_model(path, device):
     return model_
 
 
-@st.experimental_singleton
+@st.cache_resource
 def download_model(url):
     model_file = wget.download(url, out="models")
     return model_file
